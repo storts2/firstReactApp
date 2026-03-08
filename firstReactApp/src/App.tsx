@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {type ChangeEvent, useState} from 'react'
 import './App.css'
 
 function App() {
@@ -6,8 +6,8 @@ function App() {
     function UserInput() {
         const [input, setInput] = useState<string>("");
 
-        function handleChange() {
-            setInput(event.target.value)
+        function handleChange(e: ChangeEvent<HTMLInputElement>) {
+            setInput(e.target.value);
         }
 
         return (
@@ -18,6 +18,20 @@ function App() {
                     onChange={handleChange}
                 />
                 <p>User Input: {input}</p>
+                <div>
+                    {input.split('').map((char : string) => {
+                        const srcString = `./assets/${char.toUpperCase()}.png`;
+                        const altString = `NO IMAGE`
+
+                        return (
+                            <img
+                                src={srcString}
+                                alt={altString}
+                                className="image"
+                            />
+                        );
+                    })}
+                </div>
             </>
         );
     }
